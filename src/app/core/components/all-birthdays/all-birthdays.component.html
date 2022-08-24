@@ -1,0 +1,33 @@
+<div class="container mt-5">
+    <div class="card content">
+        <div class="row pt-5 pb-5 ps-5">
+            <div class="col-sm" *ngFor="let user of allUsers | paginate:{itemsPerPage: 4, currentPage: page, totalItems: countUsers}">
+                <div class="card w-75 card-user" id="{{ user.id }}" on-click="onClickCard($event)">
+                    <img class="card-img-top mt-3" [src]="user.photo" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ user.fio }}</h5>
+                        <p class="card-text">День рождения будет {{ user.birthdayDate }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer w-100">
+            <div class="row mt-3">
+                <div class="col-sm">
+                    <app-modal-add></app-modal-add>
+                </div>
+                <div class="col-sm">
+                    <pagination-controls (pageChange)="page=$event"></pagination-controls>
+                </div>
+                <div class="col-sm">
+                    <p class="lead" *ngIf="idPrevCard == -1">Нажмите на одну из карточек</p>
+                    <app-modal-remove *ngIf="idPrevCard != -1" [user]="user" (listUsersEmitter)="updateListUsers($event)"></app-modal-remove>
+                    <app-modal-edit *ngIf="idPrevCard != -1" [user]="user"></app-modal-edit>
+                    <!-- <button class="btn btn-info float-end">Редактировать</button> -->
+                    <!-- <button class="btn btn-danger float-end">Удалить</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

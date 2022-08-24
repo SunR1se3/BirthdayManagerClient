@@ -1,0 +1,29 @@
+<div class="container mt-5">
+    <h1 class="text-center">Список ближайших ДРшек</h1>
+    <div class="card content">
+        <div class="row pt-5 pb-5 ps-5">
+            <div class="col-sm" *ngFor="let user of upcomingBirthdays | paginate:{itemsPerPage: 4, currentPage: page, totalItems: countUsers}">
+                <div [class.todayBirthday]="user.birthdayDate == today" class="card w-75 card-user" id="{{ user.id }}">
+                    <img class="card-img-top mt-3" [src]="user.photo" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ user.fio }}</h5>
+                        <p *ngIf="user.birthdayDate != today" class="card-text">День рождения будет {{ user.birthdayDate }}</p>
+                        <p *ngIf="user.birthdayDate == today" class="lead">Сегодня празднует свой день рождения!!!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer w-100">
+            <div class="row mt-3">
+                <div class="col-sm">
+                    <app-modal-add></app-modal-add>
+                </div>
+                <div class="col-sm">
+                    <pagination-controls (pageChange)="page=$event"></pagination-controls>
+                </div>
+                <div class="col-sm"></div>
+            </div>
+        </div>
+    </div>
+</div>
+

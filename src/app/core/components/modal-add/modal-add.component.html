@@ -1,0 +1,27 @@
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Добавление</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="userForm" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="fio">ФИО</label>
+                <input formControlName="fio" type="text" class="form-control" id="fio">
+            </div>
+            <div class="form-group">
+                <label for="birthdayDate">Дата рождения</label>
+                <input formControlName="birthdayDate" type="date" class="form-control" id="birthdayDate">
+            </div>
+            <div class="form-group">
+                <label for="photo">Фото</label>
+                <input formControlName="photo" type="file" class="form-control" id="photo" (change)="saveFile($event)">
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" (click)="addData()">Сохранить</button>
+    </div>
+</ng-template>
+
+<button class="btn btn-primary" (click)="open(content)">Добавить</button>
